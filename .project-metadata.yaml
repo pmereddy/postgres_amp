@@ -33,7 +33,7 @@ environment_variables:
 runtimes:
   - editor: PBJ Workbench
     kernel: Python 3.11
-    edition: Standard PG
+    edition: Standard PG16
 
 tasks:
   - type: run_session
