@@ -4,6 +4,7 @@ import subprocess
 
 packages = [
     ("psycopg2", None),
+    ("gradio", None),
 ]
 
 # Iterate over the packages and install them one by one
