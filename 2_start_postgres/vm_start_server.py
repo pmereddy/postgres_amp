@@ -6,10 +6,7 @@ def uppercase(text):
     return (text, text.upper())
 
 def main():
-    # Move this to configure step
-    print(subprocess.run(["/usr/lib/postgresql/16/bin/initdb","-D","/home/cdsw/postgresql" ], shell=False))
-
-    print(subprocess.run(["/usr/lib/postgresql/16/bin/pg_ctl","-D","/home/cdsw/postgresql", "-o", '"-k /tmp "', "-o" '"-c listen_addresses=*"', "start"], shell=False))
+    print(subprocess.run(["/usr/lib/postgresql/16/bin/pg_ctl","-D","/home/cdsw/postgresql", "start"], shell=False))
 
     # Configure gradio QA app 
     print("Configuring dummy gradio app")
