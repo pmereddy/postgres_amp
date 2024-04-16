@@ -1,6 +1,32 @@
 import subprocess
 import os
+import gradio
 
-port = str(os.environ.get('CDSW_APP_PORT', 8000))
+def uppercase(text):
+    return text.upper()
 
-print(subprocess.run(["nohup", "python3","2_start_postgres/launch_app.py","--share","--port", port, '>/dev/null', '2>&1', '&' ],shell=False))
+def main():
+    # Configure gradio QA app 
+    print("Configuring gradio app")
+    demo = gradio.Interface(fn=uppercase, 
+                            inputs=gradio.Textbox(label="Question", placeholder=""),
+                            outputs=[gradio.Textbox(label="Asking LLM with No Context"),
+                                     gradio.Textbox(label="Asking LLM with Context (RAG)")],
+                            examples=["What are ML Runtimes?",
+                                      "What kinds of users use CML?",
+                                      "How do data scientists use CML?",
+                                      "What are iceberg tables?"],
+                            allow_flagging="never")
+
+
+    # Launch gradio app
+    print("Launching gradio app")
+    demo.launch(share=True,
+                enable_queue=True,
+                show_error=True,
+                server_name='127.0.0.1',
+                server_port=int(os.getenv('CDSW_APP_PORT')))
+    print("Gradio app ready")
+
+if __name__ == "__main__":
+    main()
